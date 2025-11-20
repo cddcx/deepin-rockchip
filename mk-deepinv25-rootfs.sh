@@ -31,7 +31,8 @@ dpkg -i /packages/boot/*.deb
         deepin-desktop-environment-cli \
         deepin-desktop-environment-extras \
         firefox \
-        fastfetch
+        fastfetch \
+        gparted
 
 systemctl enable lightdm
 
