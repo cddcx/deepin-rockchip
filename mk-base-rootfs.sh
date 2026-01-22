@@ -27,13 +27,13 @@ sudo apt update -y && sudo apt install -y curl git mmdebstrap qemu-user qemu-use
 sudo systemctl start systemd-binfmt
 
 sudo mmdebstrap  \
-	--hook-dir=/usr/share/mmdebstrap/hooks/merged-usr \
-	--skip=check/empty \
-	--include=$PACKAGES \
-	--components="main,commercial,community" \
-	--variant=minbase \
-	--architectures=arm64 \
-	--customize=sudo ./config/hooks.chroot/second-stage \
+ --hook-dir=/usr/share/mmdebstrap/hooks/merged-usr \
+ --skip=check/empty \
+ --include=$PACKAGES \
+ --components="main,commercial,community" \
+ --variant=minbase \
+ --architectures=arm64 \
+ --customize=sudo ./config/hooks.chroot/second-stage \
 $dist_version \
 $ROOTFS \
 "${REPOS[@]}"
