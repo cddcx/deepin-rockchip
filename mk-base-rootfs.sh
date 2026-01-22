@@ -22,20 +22,21 @@ ROOTFS=$OUT_DIR/$dist_name-$dist_version
 mkdir -p $OUT_DIR
 mkdir -p $ROOTFS
 apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 425956BB3E31DF51
-sudo apt update -y && sudo apt install -y curl git mmdebstrap qemu-user-static usrmerge systemd-container usrmerge
+sudo apt update -y && sudo apt install -y curl git mmdebstrap qemu-user qemu-user-static binfmt-support usrmerge systemd-container
 # 开启异架构支持
 sudo systemctl start systemd-binfmt
 
 sudo mmdebstrap  \
 	--hook-dir=/usr/share/mmdebstrap/hooks/merged-usr \
+	--skip=check/empty \
 	--include=$PACKAGES \
 	--components="main,commercial,community" \
 	--variant=minbase \
 	--architectures=arm64 \
-	--customize=./config/hooks.chroot/second-stage \
-	$dist_version \
-	$ROOTFS \
-	"${REPOS[@]}"
+	--customize=sudo ./config/hooks.chroot/second-stage \
+$dist_version \
+$ROOTFS \
+"${REPOS[@]}"
 	
 # 生成压缩包
 
